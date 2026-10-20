@@ -76,8 +76,7 @@ export default function BookingPage({ params }: { params: Promise<Params> }) {
     if (!car) return;
 
     const id = `AR-${Date.now().toString(36).toUpperCase()}`;
-    const booking: Booking = {
-      id,
+    const booking = {
       carId: car.id,
       carBrand: car.brand,
       carModel: car.model,
@@ -89,13 +88,12 @@ export default function BookingPage({ params }: { params: Promise<Params> }) {
       startDate: form.startDate,
       endDate: form.endDate,
       comment: form.comment,
-      totalDays: days,
-      totalPrice: total,
-      status: "Активно",
-      createdAt: new Date().toISOString(),
+      days,
+      total,
     };
-    addBooking(booking);
-    setBookingId(id);
+
+    const newBooking = addBooking(booking);
+    setBookingId(newBooking.id);
     setSubmitted(true);
   }
 
